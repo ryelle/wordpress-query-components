@@ -8,8 +8,8 @@ import { bindActionCreators } from 'redux';
 /**
  * Internal dependencies
  */
-import { isRequestingPage } from 'state/pages/selectors';
-import { requestPage } from 'state/pages/actions';
+import { isRequestingPage } from 'wordpress-redux/selectors/pages';
+import { requestPage } from 'wordpress-redux/pages';
 
 class QueryPage extends Component {
 	componentWillMount() {

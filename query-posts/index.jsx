@@ -9,8 +9,8 @@ import { bindActionCreators } from 'redux';
 /**
  * Internal dependencies
  */
-import { isRequestingPostsForQuery, isRequestingPost } from 'state/posts/selectors';
-import { requestPosts, requestPost } from 'state/posts/actions';
+import { isRequestingPostsForQuery, isRequestingPost } from 'wordpress-redux/selectors/posts';
+import { requestPosts, requestPost } from 'wordpress-redux/posts';
 
 class QueryPosts extends Component {
 	componentWillMount() {
