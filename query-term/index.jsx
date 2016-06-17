@@ -8,8 +8,8 @@ import { bindActionCreators } from 'redux';
 /**
  * Internal dependencies
  */
-import { isRequestingTerm } from 'wordpress-redux/selectors/terms';
-import { requestTerm } from 'wordpress-redux/terms';
+import { isRequestingTerm } from 'state/selectors';
+import { requestTerm } from 'state/terms';
 
 class QueryTerm extends Component {
 	componentWillMount() {

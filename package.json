@@ -5,29 +5,22 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "NODE_ENV=production webpack",
-    "dev": "webpack",
-    "watch": "webpack --watch",
     "lint": "eslint ."
   },
   "author": "",
   "license": "GPL-2.0+",
   "devDependencies": {
-    "babel-core": "^6.9.1",
     "babel-eslint": "^6.0.4",
-    "babel-loader": "^6.2.4",
-    "babel-preset-es2015": "^6.9.0",
-    "babel-preset-react": "^6.5.0",
     "eslint": "^2.11.1",
     "eslint-loader": "^1.3.0",
-    "eslint-plugin-react": "^5.1.1",
-    "webpack": "^1.13.1"
+    "eslint-plugin-react": "^5.1.1"
   },
   "dependencies": {
     "react": "^15.1.0",
     "react-redux": "^4.4.5",
     "redux": "^3.5.2",
-    "shallowequal": "^0.2.2"
+    "shallowequal": "^0.2.2",
+    "wordpress-rest-api": "^0.7.0"
   },
   "engines": {
     "node": ">=0.10"

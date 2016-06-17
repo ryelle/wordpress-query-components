@@ -8,8 +8,8 @@ import { bindActionCreators } from 'redux';
 /**
  * Internal dependencies
  */
-import { isRequestingCommentsForPost } from 'wordpress-redux/selectors/comments';
-import { requestComments } from 'wordpress-redux/comments';
+import { isRequestingCommentsForPost } from 'state/selectors';
+import { requestComments } from 'state/comments';
 
 class QueryComments extends Component {
 	componentWillMount() {
