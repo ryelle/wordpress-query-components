@@ -8,8 +8,8 @@ import { bindActionCreators } from 'redux';
 /**
  * Internal dependencies
  */
-import { isRequestingPage } from 'state/selectors';
-import { requestPage } from 'state/pages';
+import { isRequestingPage } from '../state/selectors';
+import { requestPage } from '../state/pages';
 
 class QueryPage extends Component {
 	componentWillMount() {
