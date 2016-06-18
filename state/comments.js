@@ -1,10 +1,10 @@
+/*global SiteEndpoint */
 /**
  * External dependencies
  */
 import { combineReducers } from 'redux';
 import keyBy from 'lodash/keyBy';
-const endpoint = process.env.endpoint;
-const site = require( 'wordpress-rest-api' )( { endpoint: endpoint } );
+const site = require( 'wordpress-rest-api' )( { endpoint: SiteEndpoint } );
 
 /**
  * Comment actions
