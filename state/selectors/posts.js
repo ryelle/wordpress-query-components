@@ -61,7 +61,7 @@ export function getTotalPagesForQuery( state, query ) {
 		return 1;
 	}
 
-	return parseInt( state.posts.totalPages[ serializedQuery ] );
+	return parseInt( state.posts.totalPages[ serializedQuery ], 10 );
 }
 
 /**

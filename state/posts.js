@@ -118,9 +118,9 @@ function queries( state = {}, action ) {
 			return Object.assign( {}, state, {
 				[ serializedQuery ]: action.posts.map( ( post ) => post.id )
 			} );
+		default:
+			return state;
 	}
-
-	return state;
 }
 
 /**
@@ -163,7 +163,9 @@ export function requestPosts( query = {} ) {
 			query
 		} );
 
-		return site.posts().filter( query ).then( ( data ) => {
+		const perPage = query.per_page || 10;
+
+		return site.posts().perPage( perPage ).filter( query ).embed().then( ( data ) => {
 			dispatch( {
 				type: POSTS_RECEIVE,
 				posts: data

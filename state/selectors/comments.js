@@ -51,5 +51,5 @@ export function getTotalCommentsForPost( state, postId ) {
 		return 0;
 	}
 
-	return parseInt( state.comments.totals[ postId ] );
+	return parseInt( state.comments.totals[ postId ], 10 );
 }
