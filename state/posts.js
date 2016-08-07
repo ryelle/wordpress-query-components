@@ -4,7 +4,7 @@
  */
 import { combineReducers } from 'redux';
 import keyBy from 'lodash/keyBy';
-const site = require( 'wordpress-rest-api' )( { endpoint: SiteEndpoint } );
+const site = require( 'wpapi' )( { endpoint: SiteEndpoint } );
 
 import {
 	getSerializedPostsQuery
