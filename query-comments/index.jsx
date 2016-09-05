@@ -4,12 +4,15 @@
 import { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import debugFactory from 'debug';
 
 /**
  * Internal dependencies
  */
 import { isRequestingCommentsForPost } from '../state/selectors';
 import { requestComments } from '../state/comments';
+
+const debug = debugFactory( 'query:comment' );
 
 class QueryComments extends Component {
 	componentWillMount() {
@@ -26,7 +29,7 @@ class QueryComments extends Component {
 
 	request( props ) {
 		if ( ! props.requesting ) {
-			console.log( 'Request comments for', props.postId );
+			debug( `Request comments for ${ props.postId }` );
 			props.requestComments( props.postId );
 		}
 	}

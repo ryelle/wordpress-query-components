@@ -5,12 +5,15 @@ import { Component, PropTypes } from 'react';
 import shallowEqual from 'shallowequal';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import debugFactory from 'debug';
 
 /**
  * Internal dependencies
  */
 import { isRequestingPostsForQuery, isRequestingPost } from '../state/selectors';
 import { requestPosts, requestPost } from '../state/posts';
+
+const debug = debugFactory( 'query:post' );
 
 class QueryPosts extends Component {
 	componentWillMount() {
@@ -30,12 +33,12 @@ class QueryPosts extends Component {
 		const single = !! props.postSlug;
 
 		if ( ! single && ! props.requestingPosts ) {
-			console.log( 'Request post list using query', props.query );
+			debug( `Request post list using query ${ props.query }` );
 			props.requestPosts( props.query );
 		}
 
 		if ( single && ! props.requestingPost ) {
-			console.log( 'Request single post', props.postSlug );
+			debug( `Request single post ${ props.postSlug }` );
 			props.requestPost( props.postSlug );
 		}
 	}

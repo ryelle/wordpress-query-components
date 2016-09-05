@@ -4,12 +4,15 @@
 import { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import debugFactory from 'debug';
 
 /**
  * Internal dependencies
  */
 import { isRequestingTerm } from '../state/selectors';
 import { requestTerm } from '../state/terms';
+
+const debug = debugFactory( 'query:term' );
 
 class QueryTerm extends Component {
 	componentWillMount() {
@@ -27,7 +30,7 @@ class QueryTerm extends Component {
 
 	request( props ) {
 		if ( ! props.requestingTerm ) {
-			console.log( 'Request single term', props.taxonomy, props.termSlug );
+			debug( `Request single term ${ props.taxonomy } ${ props.termSlug }` );
 			props.requestTerm( props.taxonomy, props.termSlug );
 		}
 	}

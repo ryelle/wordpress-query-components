@@ -4,12 +4,15 @@
 import { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import debugFactory from 'debug';
 
 /**
  * Internal dependencies
  */
 import { isRequestingPage } from '../state/selectors';
 import { requestPage } from '../state/pages';
+
+const debug = debugFactory( 'query:page' );
 
 class QueryPage extends Component {
 	componentWillMount() {
@@ -26,7 +29,7 @@ class QueryPage extends Component {
 
 	request( props ) {
 		if ( ! props.requestingPage ) {
-			console.log( 'Request single page', props.pagePath );
+			debug( `Request single page ${ props.pagePath }` );
 			props.requestPage( props.pagePath );
 		}
 	}
