@@ -102,7 +102,7 @@ export function requestTerm( taxonomy, termSlug ) {
 		let taxonomyFunc;
 		if ( 'category' === taxonomy ) {
 			taxonomyFunc = 'categories';
-		} else if ( 'tag' === taxonomy ) {
+		} else if ( ( 'post_tag' === taxonomy ) || ( 'tag' === taxonomy ) ) {
 			taxonomyFunc = 'tags';
 		} else {
 			taxonomyFunc = 'taxonomies';
