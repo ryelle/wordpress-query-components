@@ -4,6 +4,7 @@
  */
 import { combineReducers } from 'redux';
 import keyBy from 'lodash/keyBy';
+import find from 'lodash/find';
 const site = require( 'wpapi' )( { endpoint: SiteEndpoint } );
 
 /**
