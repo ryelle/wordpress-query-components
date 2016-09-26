@@ -1,11 +1,11 @@
-/*global SiteEndpoint */
+/*global SiteSettings */
 /**
  * External dependencies
  */
 import { combineReducers } from 'redux';
 import keyBy from 'lodash/keyBy';
 import find from 'lodash/find';
-const site = require( 'wpapi' )( { endpoint: SiteEndpoint } );
+const site = require( 'wpapi' )( { endpoint: SiteSettings.endpoint, nonce: SiteSettings.nonce } );
 
 /**
  * Term actions
