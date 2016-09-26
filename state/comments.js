@@ -13,6 +13,9 @@ export const COMMENTS_REQUEST = 'wordpress-redux/comments/REQUEST';
 export const COMMENTS_REQUEST_SUCCESS = 'wordpress-redux/comments/REQUEST_SUCCESS';
 export const COMMENTS_REQUEST_FAILURE = 'wordpress-redux/comments/REQUEST_FAILURE';
 export const COMMENTS_RECEIVE = 'wordpress-redux/comments/RECEIVE';
+export const COMMENT_SUBMIT_REQUEST = 'wordpress-redux/comment-submit/REQUEST';
+export const COMMENT_SUBMIT_REQUEST_SUCCESS = 'wordpress-redux/comment-submit/REQUEST_SUCCESS';
+export const COMMENT_SUBMIT_REQUEST_FAILURE = 'wordpress-redux/comment-submit/REQUEST_FAILURE';
 
 /**
  * Tracks all known comment objects, indexed by comment ID.
@@ -26,6 +29,10 @@ function items( state = {}, action ) {
 		case COMMENTS_RECEIVE:
 			const comments = keyBy( action.comments, 'id' );
 			return Object.assign( {}, state, comments );
+		case COMMENT_SUBMIT_REQUEST_SUCCESS:
+			return Object.assign( {}, state, {
+				[ action.comment.id ]: action.comment
+			} );
 		default:
 			return state;
 	}
@@ -43,6 +50,15 @@ function results( state = {}, action ) {
 		case COMMENTS_REQUEST_SUCCESS:
 			return Object.assign( {}, state, {
 				[ action.postId ]: action.comments.map( ( comment ) => comment.id )
+			} );
+		case COMMENT_SUBMIT_REQUEST_SUCCESS:
+			if ( ! state[ action.postId ] ) {
+				return Object.assign( {}, state, {
+					[ action.postId ]: action.comment.id
+				} );
+			}
+			return Object.assign( {}, state, {
+				[ action.postId ]: [ ... state[ action.postId ], action.comment.id ]
 			} );
 		default:
 			return state;
@@ -82,6 +98,11 @@ function totals( state = {}, action ) {
 	switch ( action.type ) {
 		case COMMENTS_REQUEST_SUCCESS:
 			return Object.assign( {}, state[ action.postId ], { [ action.postId ]: action.count } );
+		case COMMENT_SUBMIT_REQUEST_SUCCESS:
+			if ( ! state[ action.postId ] ) {
+				return Object.assign( {}, state[ action.postId ], { [ action.postId ]: 1 } );
+			}
+			return Object.assign( {}, state[ action.postId ], { [ action.postId ]: state[ action.postId ] + 1 } );
 		default:
 			return state;
 	}
@@ -123,6 +144,36 @@ export function requestComments( postId ) {
 			dispatch( {
 				type: COMMENTS_REQUEST_FAILURE,
 				postId,
+				error
+			} );
+		} );
+	};
+}
+
+/**
+ * Triggers a network request to submit a new comment
+ *
+ * @param  {object}    comment  The comment object to be submitted
+ * @return {Function}           Action thunk
+ */
+export function submitComment( comment ) {
+	return ( dispatch ) => {
+		dispatch( {
+			type: COMMENT_SUBMIT_REQUEST,
+			postId: comment.post,
+		} );
+
+		return site.comments().post( comment ).then( ( data ) => {
+			dispatch( {
+				type: COMMENT_SUBMIT_REQUEST_SUCCESS,
+				comment: data,
+				postId: comment.post,
+			} );
+			return null;
+		} ).catch( ( error ) => {
+			dispatch( {
+				type: COMMENT_SUBMIT_REQUEST_FAILURE,
+				postId: comment.post,
 				error
 			} );
 		} );
