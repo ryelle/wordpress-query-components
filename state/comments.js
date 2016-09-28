@@ -45,7 +45,7 @@ function items( state = {}, action ) {
  * @param  {Object} action Action payload
  * @return {Object}        Updated state
  */
-function results( state = {}, action ) {
+function itemsOnPost( state = {}, action ) {
 	switch ( action.type ) {
 		case COMMENTS_REQUEST_SUCCESS:
 			return Object.assign( {}, state, {
@@ -58,7 +58,7 @@ function results( state = {}, action ) {
 				} );
 			}
 			return Object.assign( {}, state, {
-				[ action.postId ]: [ ... state[ action.postId ], action.comment.id ]
+				[ action.postId ]: [ ...state[ action.postId ], action.comment.id ]
 			} );
 		default:
 			return state;
@@ -108,11 +108,32 @@ function totals( state = {}, action ) {
 	}
 }
 
+/**
+ * Returns the updated comment requests state after an action has been
+ * dispatched. The state reflects a mapping of post ID to a
+ * boolean reflecting whether a request for the comments is in progress.
+ *
+ * @param  {Object} state  Current state
+ * @param  {Object} action Action payload
+ * @return {Object}        Updated state
+ */
+function isSubmitting( state = {}, action ) {
+	switch ( action.type ) {
+		case COMMENT_SUBMIT_REQUEST:
+		case COMMENT_SUBMIT_REQUEST_SUCCESS:
+		case COMMENT_SUBMIT_REQUEST_FAILURE:
+			return Object.assign( {}, state[ action.postId ], { [ action.postId ]: COMMENT_SUBMIT_REQUEST === action.type } );
+		default:
+			return state;
+	}
+}
+
 export default combineReducers( {
 	items,
-	results,
+	itemsOnPost,
 	requests,
-	totals
+	totals,
+	isSubmitting
 } );
 
 /**

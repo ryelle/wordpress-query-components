@@ -18,11 +18,11 @@ export function getComment( state, globalId ) {
  * @return {?Array}          Comments for the given post
  */
 export function getCommentsForPost( state, postId ) {
-	if ( ! state.comments.results[ postId ] ) {
+	if ( ! state.comments.itemsOnPost[ postId ] ) {
 		return null;
 	}
 
-	return state.comments.results[ postId ].map( ( globalId ) => {
+	return state.comments.itemsOnPost[ postId ].map( ( globalId ) => {
 		return getComment( state, globalId );
 	} ).filter( Boolean );
 }
@@ -52,4 +52,16 @@ export function getTotalCommentsForPost( state, postId ) {
 	}
 
 	return parseInt( state.comments.totals[ postId ], 10 );
+}
+
+/**
+ * Returns true if currently submitting a comment on a given post ID, or
+ * false otherwise.
+ *
+ * @param  {Object}  state   Global state tree
+ * @param  {int}     postId  Post ID for the queried post
+ * @return {Boolean}         Whether a comment is being submitted
+ */
+export function isSubmittingCommentOnPost( state, postId ) {
+	return !! state.comments.isSubmitting[ postId ];
 }
