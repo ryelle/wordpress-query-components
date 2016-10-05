@@ -4,6 +4,7 @@
  */
 import { combineReducers } from 'redux';
 import keyBy from 'lodash/keyBy';
+import reduce from 'lodash/reduce';
 const site = require( 'wpapi' )( { endpoint: SiteSettings.endpoint, nonce: SiteSettings.nonce } );
 
 import {
@@ -136,6 +137,12 @@ function slugs( state = {}, action ) {
 			return Object.assign( {}, state, {
 				[ action.postSlug ]: action.postId
 			} );
+		case POSTS_RECEIVE:
+			const posts = reduce( action.posts, ( memo, p ) => {
+				memo[ p.slug ] = p.id;
+				return memo;
+			}, {} );
+			return Object.assign( {}, state, posts );
 		default:
 			return state;
 	}
