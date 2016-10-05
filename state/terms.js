@@ -70,8 +70,11 @@ function slugs( state = {}, action ) {
 					}
 				} );
 			}
-			return Object.assign( {}, state[ action.taxonomy ], {
-				[ action.termSlug ]: action.termId
+			return Object.assign( {}, state, {
+				[ action.taxonomy ]: {
+					...state[ action.taxonomy ],
+					[ action.termSlug ]: action.termId
+				}
 			} );
 		default:
 			return state;
