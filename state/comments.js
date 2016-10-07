@@ -12,7 +12,6 @@ const site = require( 'wpapi' )( { endpoint: SiteSettings.endpoint, nonce: SiteS
 export const COMMENTS_REQUEST = 'wordpress-redux/comments/REQUEST';
 export const COMMENTS_REQUEST_SUCCESS = 'wordpress-redux/comments/REQUEST_SUCCESS';
 export const COMMENTS_REQUEST_FAILURE = 'wordpress-redux/comments/REQUEST_FAILURE';
-export const COMMENTS_RECEIVE = 'wordpress-redux/comments/RECEIVE';
 export const COMMENT_SUBMIT_REQUEST = 'wordpress-redux/comment-submit/REQUEST';
 export const COMMENT_SUBMIT_REQUEST_SUCCESS = 'wordpress-redux/comment-submit/REQUEST_SUCCESS';
 export const COMMENT_SUBMIT_REQUEST_FAILURE = 'wordpress-redux/comment-submit/REQUEST_FAILURE';
@@ -26,7 +25,7 @@ export const COMMENT_SUBMIT_REQUEST_FAILURE = 'wordpress-redux/comment-submit/RE
  */
 function items( state = {}, action ) {
 	switch ( action.type ) {
-		case COMMENTS_RECEIVE:
+		case COMMENTS_REQUEST_SUCCESS:
 			const comments = keyBy( action.comments, 'id' );
 			return Object.assign( {}, state, comments );
 		case COMMENT_SUBMIT_REQUEST_SUCCESS:
@@ -150,10 +149,6 @@ export function requestComments( postId ) {
 		} );
 
 		return site.comments().forPost( postId ).then( ( data ) => {
-			dispatch( {
-				type: COMMENTS_RECEIVE,
-				comments: data
-			} );
 			dispatch( {
 				type: COMMENTS_REQUEST_SUCCESS,
 				comments: data,

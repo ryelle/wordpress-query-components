@@ -13,7 +13,6 @@ const site = require( 'wpapi' )( { endpoint: SiteSettings.endpoint, nonce: SiteS
 export const TERM_REQUEST = 'wordpress-redux/terms/REQUEST';
 export const TERM_REQUEST_SUCCESS = 'wordpress-redux/terms/REQUEST_SUCCESS';
 export const TERM_REQUEST_FAILURE = 'wordpress-redux/terms/REQUEST_FAILURE';
-export const TERM_RECEIVE = 'wordpress-redux/terms/RECEIVE';
 
 /**
  * Tracks all known post objects, indexed by post global ID.
@@ -24,7 +23,7 @@ export const TERM_RECEIVE = 'wordpress-redux/terms/RECEIVE';
  */
 function items( state = {}, action ) {
 	switch ( action.type ) {
-		case TERM_RECEIVE:
+		case TERM_REQUEST_SUCCESS:
 			const terms = keyBy( [ action.term ], 'id' );
 			return Object.assign( {}, state, terms );
 		default:
@@ -116,11 +115,8 @@ export function requestTerm( taxonomy, termSlug ) {
 				slug: termSlug
 			} );
 			dispatch( {
-				type: TERM_RECEIVE,
-				term
-			} );
-			dispatch( {
 				type: TERM_REQUEST_SUCCESS,
+				term,
 				taxonomy,
 				termSlug,
 				termId: term.id,

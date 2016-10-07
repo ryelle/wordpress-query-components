@@ -12,7 +12,6 @@ const site = require( 'wpapi' )( { endpoint: SiteSettings.endpoint, nonce: SiteS
 export const PAGE_REQUEST = 'wordpress-redux/page/REQUEST';
 export const PAGE_REQUEST_SUCCESS = 'wordpress-redux/page/REQUEST_SUCCESS';
 export const PAGE_REQUEST_FAILURE = 'wordpress-redux/page/REQUEST_FAILURE';
-export const PAGE_RECEIVE = 'wordpress-redux/page/RECEIVE';
 
 /**
  * Tracks all known page objects, indexed by post global ID.
@@ -23,7 +22,7 @@ export const PAGE_RECEIVE = 'wordpress-redux/page/RECEIVE';
  */
 function items( state = {}, action ) {
 	switch ( action.type ) {
-		case PAGE_RECEIVE:
+		case PAGE_REQUEST_SUCCESS:
 			const posts = keyBy( [ action.page ], 'id' );
 			return Object.assign( {}, state, posts );
 		default:
@@ -90,10 +89,6 @@ export function requestPage( path ) {
 
 		return site.pages().path( path ).embed().then( ( data ) => {
 			const page = data[0];
-			dispatch( {
-				type: PAGE_RECEIVE,
-				page
-			} );
 			dispatch( {
 				type: PAGE_REQUEST_SUCCESS,
 				postId: page.id,
