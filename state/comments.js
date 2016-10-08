@@ -148,7 +148,7 @@ export function requestComments( postId ) {
 			postId,
 		} );
 
-		return site.comments().forPost( postId ).then( ( data ) => {
+		return site.comments().forPost( postId ).order( 'asc' ).then( ( data ) => {
 			dispatch( {
 				type: COMMENTS_REQUEST_SUCCESS,
 				comments: data,
