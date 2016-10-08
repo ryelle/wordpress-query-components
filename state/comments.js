@@ -185,13 +185,14 @@ export function submitComment( comment ) {
 				comment: data,
 				postId: comment.post,
 			} );
-			return null;
+			return data;
 		} ).catch( ( error ) => {
 			dispatch( {
 				type: COMMENT_SUBMIT_REQUEST_FAILURE,
 				postId: comment.post,
 				error
 			} );
+			return error;
 		} );
 	};
 }
