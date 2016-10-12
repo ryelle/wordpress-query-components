@@ -41,8 +41,8 @@ class QueryTerm extends Component {
 }
 
 QueryTerm.propTypes = {
-	termSlug: PropTypes.string,
-	taxonomy: PropTypes.string,
+	termSlug: PropTypes.string.isRequired,
+	taxonomy: PropTypes.string.isRequired,
 	requestingTerm: PropTypes.bool,
 	requestTerm: PropTypes.func
 };

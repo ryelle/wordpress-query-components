@@ -1,7 +1,7 @@
 Query Comments
 ==============
 
-Query Comments is a React component used in managing the fetching of post comments.
+Query Comments is a React component used in managing the fetching of comments on a post or page.
 
 ## Usage
 
@@ -38,4 +38,4 @@ export default function MyCommentsList( { comments } ) {
 	<tr><th>Default</th><td><code>null</code></td></tr>
 </table>
 
-The post to grab comments from.
+The post (or page) to grab comments from.

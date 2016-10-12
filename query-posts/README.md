@@ -1,7 +1,7 @@
 Query Posts
 ===========
 
-Query Posts is a React component used in managing the fetching of posts queries.
+Query Posts is a React component used in managing the fetching of posts queries, or single posts by the post slug.
 
 ## Usage
 
@@ -39,3 +39,13 @@ export default function MyPostsList( { posts } ) {
 </table>
 
 The query to be used in requesting posts.
+
+### `postSlug`
+
+<table>
+	<tr><th>Type</th><td>String</td></tr>
+	<tr><th>Required</th><td>No</td></tr>
+	<tr><th>Default</th><td><code>null</code></td></tr>
+</table>
+
+The post slug of the post to request.

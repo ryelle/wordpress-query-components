@@ -40,7 +40,7 @@ class QueryComments extends Component {
 }
 
 QueryComments.propTypes = {
-	postId: PropTypes.number,
+	postId: PropTypes.number.isRequired,
 	requesting: PropTypes.bool,
 	requestComments: PropTypes.func
 };

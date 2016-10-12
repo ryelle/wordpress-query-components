@@ -40,7 +40,7 @@ class QueryPage extends Component {
 }
 
 QueryPage.propTypes = {
-	pagePath: PropTypes.string,
+	pagePath: PropTypes.string.isRequired,
 	requestingPage: PropTypes.bool,
 	requestPage: PropTypes.func
 };
