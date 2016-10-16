@@ -101,7 +101,7 @@ function totals( state = {}, action ) {
 			if ( ! state[ action.postId ] ) {
 				return Object.assign( {}, state[ action.postId ], { [ action.postId ]: 1 } );
 			}
-			return Object.assign( {}, state[ action.postId ], { [ action.postId ]: state[ action.postId ] + 1 } );
+			return Object.assign( {}, state[ action.postId ], { [ action.postId ]: parseInt( state[ action.postId ], 10 ) + 1 } );
 		default:
 			return state;
 	}
